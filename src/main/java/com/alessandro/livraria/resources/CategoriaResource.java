@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alessandro.livraria.domain.Categoria;
 import com.alessandro.livraria.services.CategoriaService;
 
+// http://localhost:8080/categorias/01
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaResource {
