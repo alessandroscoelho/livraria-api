@@ -3,8 +3,8 @@ package com.alessandro.livraria.services;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-
 import com.alessandro.livraria.DTO.CategoriaDTO;
 import com.alessandro.livraria.domain.Categoria;
 import com.alessandro.livraria.repositories.CategoriaRepository;
@@ -42,8 +42,11 @@ public class CategoriaService {
 
 	public void delete(Integer id) {
 		findById(id);
-		categoriaRepository.deleteById(id);
-
+		try {
+			categoriaRepository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new com.alessandro.livraria.services.exceptions.DataIntegrityViolationException("Categoria não pode ser excluida. Possui livros associados a ela.");
+		}
 	}
 
 }
