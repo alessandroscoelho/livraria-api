@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.alessandro.livraria.DTO.CategoriaDTO;
 import com.alessandro.livraria.domain.Categoria;
 import com.alessandro.livraria.repositories.CategoriaRepository;
 import com.alessandro.livraria.services.exceptions.ObjectNotFoundException;
@@ -24,10 +26,18 @@ public class CategoriaService {
 	public List<Categoria> findAll() {
 		return categoriaRepository.findAll();
 	}
-	
+
 	public Categoria create(Categoria obj) {
 		obj.setId(null);
 		return categoriaRepository.save(obj);
+	}
+
+	public Categoria update(Integer id, CategoriaDTO objDTO) {
+		Categoria obj = findById(id);
+		obj.setNome(objDTO.getNome());
+		obj.setDescricao(objDTO.getDescricao());
+		return categoriaRepository.save(obj);
+
 	}
 
 }
