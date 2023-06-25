@@ -37,34 +37,35 @@ public class LivroResources {
 
 	// findAll
 	@GetMapping
-	public ResponseEntity<List<LivroDTO>> findAll(@RequestParam(value = "categoria", defaultValue = "0") Integer id_cat) {
+	public ResponseEntity<List<LivroDTO>> findAll(
+			@RequestParam(value = "categoria", defaultValue = "0") Integer id_cat) {
 		List<Livro> list = livroService.findAll(id_cat);
 		List<LivroDTO> listDTO = list.stream().map(obj -> new LivroDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);
-		//localhost:8080/livros?categoria=1
+		// localhost:8080/livros?categoria=1
 
 	}
 
-	// create
-	@PostMapping
-	public ResponseEntity<Livro> create(@RequestParam(value = "categoria", defaultValue = "0") Integer id_categoria,
-			@RequestParam Livro obj) {
-		// Livro newObj = livroService.create(id_categoria);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
-	}
-
-	// update
+	// update -> alterar todas as informações da intidade
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Livro> update(@PathVariable Integer id, @RequestBody Livro obj) {
 		Livro newObj = livroService.update(id, obj);
 		return ResponseEntity.ok().body(newObj);
 	}
-	//update pat
+
+	// update patch -> alterar apenas uma informação da intidade
 	@PatchMapping(value = "/{id}")
 	public ResponseEntity<Livro> updatePatch(@PathVariable Integer id, @RequestBody Livro obj) {
 		Livro newObj = livroService.update(id, obj);
 		return ResponseEntity.ok().body(newObj);
+	}
+
+	// create -> localhost:8080/livros?categoria=3
+	@PostMapping
+	public ResponseEntity<Livro> create(@RequestParam(value = "categoria", defaultValue = "0") Integer id_categoria, @RequestBody Livro obj) {
+		Livro newObj = livroService.create(id_categoria, obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{id}").buildAndExpand(newObj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
 	}
 
 	// delete
