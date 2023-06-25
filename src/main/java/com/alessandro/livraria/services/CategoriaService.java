@@ -18,8 +18,7 @@ public class CategoriaService {
 
 	public Categoria findById(Integer id) {
 		Optional<Categoria> obj = categoriaRepository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado. " + id + " Tipo: " + Categoria.class.getName()));
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado. " + id + " Tipo: " + Categoria.class.getName()));
 
 	}
 
@@ -45,7 +44,8 @@ public class CategoriaService {
 		try {
 			categoriaRepository.deleteById(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new com.alessandro.livraria.services.exceptions.DataIntegrityViolationException("Categoria não pode ser excluida. Possui livros associados a ela.");
+			throw new com.alessandro.livraria.services.exceptions.DataIntegrityViolationException(
+					"Categoria não pode ser excluida. Possui livros associados a ela.");
 		}
 	}
 

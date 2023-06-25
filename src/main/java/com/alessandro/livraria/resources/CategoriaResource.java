@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import com.alessandro.livraria.DTO.CategoriaDTO;
 import com.alessandro.livraria.domain.Categoria;
 import com.alessandro.livraria.services.CategoriaService;
