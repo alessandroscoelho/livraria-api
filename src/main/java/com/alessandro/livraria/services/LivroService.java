@@ -43,9 +43,12 @@ public class LivroService {
 
 	}
 
-	public List<Livro> findAll(Integer id_cat) {
-		categoriaService.findById(id_cat);
-		return livroRepository.findAllByCategoria(id_cat);
+//	public List<Livro> findAll(Integer id_cat) {
+//		categoriaService.findById(id_cat);
+//		return livroRepository.findAllByCategoria(id_cat);
+
+	public List<Livro> findAll() {
+		return livroRepository.findAll();
 
 	}
 

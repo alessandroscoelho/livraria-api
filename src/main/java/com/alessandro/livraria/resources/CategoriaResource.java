@@ -39,20 +39,20 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(listDTO);
 
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<Categoria> create(@RequestBody Categoria obj) {
 		obj = categoriaService.create(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
-	
+
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<CategoriaDTO> update(@PathVariable Integer id, @RequestBody CategoriaDTO objDTO) {
 		Categoria newObj = categoriaService.update(id, objDTO);
 		return ResponseEntity.ok().body(new CategoriaDTO(newObj));
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
 		categoriaService.delete(id);

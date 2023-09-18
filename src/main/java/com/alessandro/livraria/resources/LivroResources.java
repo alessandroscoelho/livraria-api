@@ -37,14 +37,21 @@ public class LivroResources {
 	}
 
 	// findAll
-	@GetMapping
-	public ResponseEntity<List<LivroDTO>> findAll(
-			@RequestParam(value = "categoria", defaultValue = "0") Integer id_cat) {
-		List<Livro> list = livroService.findAll(id_cat);
-		List<LivroDTO> listDTO = list.stream().map(obj -> new LivroDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDTO);
-		// localhost:8080/livros?categoria=1
+//	@GetMapping
+//	public ResponseEntity<List<LivroDTO>> findAll(
+//			@RequestParam(value = "categoria", defaultValue = "0") Integer id_cat) {
+//		List<Livro> list = livroService.findAll(id_cat);
+//		List<LivroDTO> listDTO = list.stream().map(obj -> new LivroDTO(obj)).collect(Collectors.toList());
+//		return ResponseEntity.ok().body(listDTO);
+//		// localhost:8080/livros?categoria=1
 
+		// findAll
+		@GetMapping
+		public ResponseEntity<List<LivroDTO>> findAll() {
+			List<Livro> list = livroService.findAll();
+			List<LivroDTO> listDTO = list.stream().map(obj -> new LivroDTO(obj)).collect(Collectors.toList());
+			return ResponseEntity.ok().body(listDTO);
+			// localhost:8080/livros?categoria=1
 	}
 
 	// update -> alterar todas as informações da intidade
